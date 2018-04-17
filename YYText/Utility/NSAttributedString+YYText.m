@@ -1376,6 +1376,9 @@ return style. _attr_;
 }
 
 - (void)yy_removeDiscontinuousAttributesInRange:(NSRange)range {
+    if (range.location + range.length > self.length) {
+        range = self.yy_rangeOfAll;
+    }
     NSArray *keys = [NSMutableAttributedString yy_allDiscontinuousAttributeKeys];
     for (NSString *key in keys) {
         [self removeAttribute:key range:range];
